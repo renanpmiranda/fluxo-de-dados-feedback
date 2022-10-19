@@ -4,6 +4,7 @@ import FormularioPostagem from "./components/FormularioPostagem/FormularioPostag
 import { Header } from "./components/Header";
 import TelaDaPostagem from "./components/TelaDaPostagem/TelaDaPostagem";
 import FormularioLogin from "./components/FormularioLogin/FormularioLogin";
+
 const GlobalStyle = createGlobalStyle`
   * {
     margin: 0;
@@ -20,19 +21,37 @@ const Container = styled.div`
 
 function App() {
   const [pageFlow, setPageFlow] = useState(1);
+  const [nome, setNome] = useState("");
+  const [fotoDePerfil, setFotoDePerfil] = useState("")
+
+  const [titulo, setTitulo] = useState("")
+  const [imagem, setImagem] = useState("")
+  const [descricao, setDescricao] = useState("")
+
   return (
     <>
       <GlobalStyle />
       <Container>
         <aside>
-          <Header />
+          <Header nome={nome} fotoDePerfil={fotoDePerfil} pageFlow={pageFlow}/>
           {pageFlow === 1 ? (
-            <FormularioLogin setPageFlow={setPageFlow} />
+            <FormularioLogin 
+            setPageFlow={setPageFlow} 
+            nome={nome} 
+            setNome={setNome} 
+            fotoDePerfil={fotoDePerfil} 
+            setFotoDePerfil={setFotoDePerfil}/>
           ) : (
-            <FormularioPostagem />
+            <FormularioPostagem 
+            titulo={titulo} 
+            setTitulo={setTitulo} 
+            imagem={imagem} 
+            setImagem={setImagem}
+            descricao={descricao}
+            setDescricao={setDescricao}/>
           )}
         </aside>
-        <TelaDaPostagem />
+        <TelaDaPostagem titulo={titulo} imagem={imagem} descricao={descricao}/>
       </Container>
     </>
   );
